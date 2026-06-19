@@ -14,7 +14,7 @@ Perseus for Slack is an AI agent that connects developer teams to live project c
 
 1. **"What services are running?"** — Real-time health checks with green/red status indicators
 2. **"What did we decide about X?"** — Persistent memory recall via Mimir (FTS5 + vector search)
-3. **"Where is that code?"** — Full-text code search across the project
+3. **"Where is that code?"** — Full-text code search across the project (composed client-side from `perseus_list` + `perseus_read`)
 4. **"What should I know about this project?"** — New member onboarding with context dump
 5. **"Ask anything"** — Natural language queries against project knowledge
 
@@ -34,7 +34,7 @@ Perseus ships as a **production MCP server** with 27+ tools, real GitHub stars, 
 - `perseus_services` — service health monitoring
 - `perseus_memory` — persistent knowledge recall
 - `perseus_read` — file inspection
-- `perseus_search` — code search
+- `perseus_list` — directory enumeration (composed with `perseus_read` for client-side code search)
 - `perseus_skills` — capability discovery
 - `perseus_context` — workspace context resolution
 

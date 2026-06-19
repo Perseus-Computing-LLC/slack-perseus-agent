@@ -5,6 +5,14 @@
 > **Repo:** https://github.com/Perseus-Computing-LLC/slack-perseus-agent  
 > **Status:** Phase 1-5 complete, video recorded. Phase 6 (Devpost submit) remains.
 
+> **Amendment (2026-06-19):** The original code called a `perseus_search` MCP
+> tool that **does not exist** on the Perseus server — `@perseus search` would
+> have errored live. Fixed: `mcp_client.search()` now composes real client-side
+> code search from `perseus_list` (enumerate) + `perseus_read` (grep in Python),
+> bounded to ≤40 files / ≤60 matches / depth ≤4. The same change fixed `read`,
+> which mis-handled Perseus's markdown-rendered output. Source listings in §8
+> below are the pre-fix versions; see the repo's `src/` for current code.
+
 ---
 
 ## 1. WHAT THIS IS

@@ -36,7 +36,7 @@ Slack user → Slack Bolt (Python, Socket Mode) → Perseus MCP server (JSON-RPC
 - `perseus_memory` — Mimir recall
 - `perseus_mimir` — direct FTS5 memory
 - `perseus_read` — file inspection
-- `perseus_search` — code search
+- `perseus_list` — directory enumeration (also powers client-side code search)
 - `perseus_skills` — skill listing
 - `perseus_context` — workspace context
 - `perseus_session` — session history

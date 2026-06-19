@@ -19,11 +19,13 @@ Built for the **Slack Agent Builder Challenge 2026** (New Slack Agent track) usi
 
 ```
 Slack User → Slack Agent (Bolt) → MCP → Perseus Server
-                                        ├── @services (health)
-                                        ├── @memory (Mimir recall)
-                                        ├── @read (file inspection)
-                                        ├── @search (code search)
-                                        └── @query (NL context)
+                                        ├── perseus_services (health)
+                                        ├── perseus_memory  (Mimir recall)
+                                        ├── perseus_read    (file inspection)
+                                        ├── perseus_list    ─┐ code search:
+                                        │                    ├─ enumerate + grep
+                                        ├── perseus_read    ─┘ (client-side)
+                                        └── perseus_get_context (NL context)
 ```
 
 ## Why MCP

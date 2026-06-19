@@ -46,7 +46,7 @@ Perseus for Slack is a Slack agent that connects developer teams to live project
               │  │ perseus_services    ── health    │ │
               │  │ perseus_memory      ── recall    │ │
               │  │ perseus_read        ── files     │ │
-              │  │ perseus_search      ── code      │ │
+              │  │ perseus_list        ── browse    │ │
               │  │ perseus_skills      ── skill list│ │
               │  │ perseus_context     ── full ctx  │ │
               │  │ perseus_session     ── history   │ │
@@ -90,6 +90,7 @@ Perseus for Slack is a Slack agent that connects developer teams to live project
 | **Intent routing** over LLM for routing | Deterministic, fast, no token cost for basic queries. NL fallback uses memory recall. |
 | **Slack Blocks** over plain text | Rich formatting improves readability. Color-coded statuses, code blocks, structured layouts. |
 | **Async throughout** | Slack Bolt is async-native. MCP client uses httpx.AsyncClient. No blocking I/O. |
+| **Client-side code search** (`perseus_list` + `perseus_read` + grep) | Perseus exposes no server-side search tool, so the agent composes one: enumerate files via `perseus_list`, fetch candidates via `perseus_read`, and match in Python. Bounded (≤40 files, ≤60 matches, depth ≤4) to cap round-trips. |
 
 ## Technology Stack
 
