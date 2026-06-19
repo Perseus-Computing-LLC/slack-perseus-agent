@@ -37,7 +37,7 @@ PERSEUS_MCP_URL = os.getenv("PERSEUS_MCP_URL", "http://localhost:5000/mcp")
 # Validate required tokens
 if not SLACK_BOT_TOKEN or SLACK_BOT_TOKEN.startswith("xoxb-y"):
     logger.warning("SLACK_BOT_TOKEN not set or using placeholder. Set it in .env")
-if not SLACK_APP_TOKEN or SLACK_APP_TOKEN.startswith("xapp-"):
+if not SLACK_APP_TOKEN or SLACK_APP_TOKEN.startswith("xapp-y"):
     logger.warning("SLACK_APP_TOKEN not set or using placeholder. Socket Mode requires this.")
 
 # ── Initialize ──────────────────────────────────────────────────────────────
