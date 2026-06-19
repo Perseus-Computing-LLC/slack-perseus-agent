@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Perseus for Slack — Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 20px;
+  }
+  .slack {
+    width: 1000px; max-width: 100%;
+    background: #1a1a2e; border-radius: 8px;
+    border: 1px solid #4a154b; overflow: hidden;
+    box-shadow: 0 0 40px rgba(74,21,75,0.3);
+  }
+  .sidebar-header {
+    background: #19171d; padding: 12px 16px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid #4a154b;
+  }
+  .workspace-name { color: #d1d2d3; font-size: 14px; font-weight: 700; }
+  .channel-header {
+    background: #1a1a2e; padding: 10px 16px;
+    border-bottom: 1px solid #2a2a3e; display: flex; align-items: center; gap: 6px;
+  }
+  .channel-name { color: #d1d2d3; font-size: 13px; }
+  .channel-hash { color: #ab9ba9; }
+  .screen {
+    height: 380px; padding: 12px 16px; overflow-y: auto;
+    font-size: 12px; line-height: 1.6; scroll-behavior: smooth;
+    background: #1a1a2e;
+  }
+  .screen::-webkit-scrollbar { width: 5px; }
+  .screen::-webkit-scrollbar-track { background: #1a1a2e; }
+  .screen::-webkit-scrollbar-thumb { background: #4a154b; border-radius: 3px; }
+
+  .line { margin: 3px 0; opacity: 0; animation: fadeIn 0.3s forwards; white-space: pre-wrap; }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .label {
+    color: #ab9ba9; font-size: 11px; margin: 8px 0 6px;
+    border-top: 1px solid #2a2a3e; padding-top: 8px;
+    text-align: center;
+  }
+  .scene-header {
+    color: #ab9ba9; font-size: 10px; text-align: center;
+    margin: 6px 0 4px; font-style: italic;
+  }
+  .msg { display: flex; gap: 8px; margin: 6px 0; align-items: flex-start; }
+  .avatar {
+    width: 28px; height: 28px; border-radius: 5px; flex-shrink: 0;
+    font-size: 12px; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: #fff;
+  }
+  .avatar.alice { background: #e06c75; }
+  .avatar.bob { background: #61afef; }
+  .avatar.carol { background: #e5c07b; }
+  .avatar.dave { background: #56b6c2; }
+  .avatar.perseus { background: #4a154b; font-size: 11px; }
+  .msg-body { flex: 1; min-width: 0; }
+  .msg-sender { font-size: 11px; font-weight: 700; margin-bottom: 2px; }
+  .msg-sender .time { color: #616061; font-weight: 400; font-size: 10px; margin-left: 6px; }
+  .alice-color { color: #e06c75; }
+  .bob-color { color: #61afef; }
+  .carol-color { color: #e5c07b; }
+  .dave-color { color: #56b6c2; }
+  .perseus-color { color: #c678dd; }
+  .msg-text {
+    color: #d1d2d3; font-size: 12px; line-height: 1.5;
+    word-break: break-word;
+  }
+  .msg-text .code { background: #2a2a3e; padding: 1px 4px; border-radius: 3px; font-size: 11px; color: #e5c07b; }
+  .msg-text .service-up { color: #98c379; }
+  .msg-text .service-na { color: #5c6370; }
+  .msg-text .bold { color: #d1d2d3; font-weight: 700; }
+  .msg-text .dim { color: #5c6370; }
+  .msg-text .hr { display: block; border-top: 1px solid #2a2a3e; margin: 4px 0; }
+
+  .highlight { color: #e5c07b; font-weight: 700; }
+
+  @keyframes cursor-blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+  .cursor { animation: cursor-blink 0.8s infinite; }
+</style>
+</head>
+<body>
+<div class="slack">
+  <div class="sidebar-header">
+    <span class="workspace-name">🏢 Perseus Computing</span>
+  </div>
+  <div class="channel-header">
+    <span class="channel-hash">#</span><span class="channel-name">engineering</span>
+  </div>
+  <div class="screen" id="screen"></div>
+</div>
+
+<script>
+const screen = document.getElementById('screen');
+
+function msg(user, color, text, time) {
+  const av = { alice:'A', bob:'B', carol:'C', dave:'D', perseus:'P' };
+  const div = document.createElement('div');
+  div.className = 'msg';
+  div.innerHTML = `<div class="avatar ${user}">${av[user]||'?'}</div>`
+    + `<div class="msg-body"><span class="msg-sender ${color ? color+'-color' : ''}">${user}`
+    + (time ? `<span class="time">${time}</span>` : '')
+    + `</span><div class="msg-text">${text}</div></div>`;
+  screen.appendChild(div);
+  screen.scrollTo({top: screen.scrollHeight, behavior: 'smooth'});
+}
+
+function scene(title) {
+  const div = document.createElement('div');
+  div.className = 'scene-header';
+  div.textContent = title;
+  screen.appendChild(div);
+}
+
+function pause(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function run() {
+  // Scene 1 - Service Health
+  scene('── Scene 1: Service Health (0:00-0:35) ──');
+  await pause(800);
+  msg('alice','alice','<span class="code">@perseus</span> services','10:23 AM');
+  await pause(1000);
+
+  // Show typing indicator briefly
+  let typing = document.createElement('div');
+  typing.className = 'msg';
+  typing.innerHTML = `<div class="avatar perseus">P</div><div class="msg-body"><div class="msg-text dim">Perseus is typing...</div></div>`;
+  screen.appendChild(typing);
+  screen.scrollTo({top: screen.scrollHeight});
+  await pause(800);
+  typing.remove();
+
+  msg('perseus','perseus',
+    '<b>Service Health</b><span class="hr"></span>'
+    + '<span class="service-up">🟢</span> <b>Hermes WebUI</b> — up (19ms)<br>'
+    + '<span class="service-up">🟢</span> <b>Minions</b> — running<br>'
+    + '<span class="service-up">🟢</span> <b>Hermes Agent</b> — running<br>'
+    + '<span class="service-na">⚪</span> <b>Docker</b> — not available<br>'
+    + '<span class="hr"></span><span class="dim">Updated 10:23:45 · Slack Hackathon 2026</span>'
+    ,'10:23 AM');
+  await pause(2000);
+
+  // Scene 2 - Memory Recall
+  scene('── Scene 2: Memory Recall (0:36-1:10) ──');
+  await pause(1500);
+  msg('bob','bob','<span class="code">@perseus</span> memory database migration strategy','10:25 AM');
+  await pause(1000);
+
+  typing = document.createElement('div');
+  typing.className = 'msg';
+  typing.innerHTML = `<div class="avatar perseus">P</div><div class="msg-body"><div class="msg-text dim">Perseus is recalling...</div></div>`;
+  screen.appendChild(typing);
+  screen.scrollTo({top: screen.scrollHeight});
+  await pause(900);
+  typing.remove();
+
+  msg('perseus','perseus',
+    '<b>🧠 Memory: database migration strategy</b><span class="hr"></span>'
+    + '<span class="dim">Found 3 results</span><br><br>'
+    + '<b>migration-strategy-v2</b><br>'
+    + '<span class="dim">2026-06-10</span><br>'
+    + '"Phased migration: SQLite → PostgreSQL with dual-write period"<br><br>'
+    + '<b>connector-migration</b><br>'
+    + '<span class="dim">2026-06-08</span><br>'
+    + '"Perseus connector swap procedure — run before deployment"<br><br>'
+    + '<b>db-decay-bug</b><br>'
+    + '<span class="dim">2026-06-05</span><br>'
+    + '"Fixed decay score in Mimir v0.5 — always cohere after backup"',
+    '10:25 AM');
+  await pause(800);
+  msg('bob','bob','Perfect, the dual-write period was exactly what I needed 👍','10:26 AM');
+  await pause(2000);
+
+  // Scene 3 - Code Search
+  scene('── Scene 3: Code Search (1:11-1:45) ──');
+  await pause(1500);
+  msg('carol','carol','<span class="code">@perseus</span> search OAuth token handling','10:28 AM');
+  await pause(900);
+
+  typing = document.createElement('div');
+  typing.className = 'msg';
+  typing.innerHTML = `<div class="avatar perseus">P</div><div class="msg-body"><div class="msg-text dim">Perseus is searching...</div></div>`;
+  screen.appendChild(typing);
+  screen.scrollTo({top: screen.scrollHeight});
+  await pause(700);
+  typing.remove();
+
+  msg('perseus','perseus',
+    '<b>🔍 Search: OAuth token handling</b><span class="hr"></span>'
+    + '<span class="dim">Found 4 matches</span><br><br>'
+    + '<b>src/gateway/auth.py</b>  <span class="code">L42</span><br>'
+    + '<span class="code">def get_oauth_token(provider):</span><br><br>'
+    + '<b>src/tools/mcp_oauth.py</b>  <span class="code">L15</span><br>'
+    + '<span class="code">class MCPOAuthManager:</span><br><br>'
+    + '<b>src/cli/login.py</b>  <span class="code">L78</span><br>'
+    + '<span class="code">token = exchange_code(code, uri)</span><br><br>'
+    + '<b>config.yaml</b>  <span class="code">L120</span><br>'
+    + '<span class="code">oauth: providers:</span>',
+    '10:28 AM');
+  await pause(1800);
+
+  // Scene 4 - Onboarding
+  scene('── Scene 4: Onboarding (1:46-2:15) ──');
+  await pause(1500);
+  msg('dave','dave','<span class="code">@perseus</span> onboard  <span class="dim">👋 new here!</span>','10:31 AM');
+  await pause(1000);
+
+  msg('perseus','perseus',
+    '<b>👋 Welcome to the project! Here\'s what you should know:</b><span class="hr"></span>'
+    + '<b>🩺 Services:</b><br>'
+    + '<span class="service-up">🟢</span> Hermes WebUI — up (19ms)<br>'
+    + '<span class="service-up">🟢</span> Minions — running<br>'
+    + '<span class="service-up">🟢</span> Hermes Agent — running<br><br>'
+    + '<b>🛠 Available Skills:</b><br>'
+    + '<span class="code">github-pr-workflow</span> — PR lifecycle<br>'
+    + '<span class="code">hackathon-submission</span> — Devpost entry workflow<br>'
+    + '<span class="code">systematic-debugging</span> — Root cause analysis<br><br>'
+    + '<b>🧠 Recent Decisions:</b><br>'
+    + '• Use postgres-16 for all new deployments<br>'
+    + '• Mimir encryption enabled (AES-256-GCM)<br>'
+    + '• CI requires rebuilt perseus.py after src changes<br>'
+    + '<span class="hr"></span><span class="dim">Try @perseus services, @perseus memory &lt;topic&gt;, or @perseus search &lt;query&gt;</span>',
+    '10:31 AM');
+  await pause(800);
+  msg('dave','dave','This is super helpful, thanks! 🚀','10:32 AM');
+  await pause(2500);
+
+  // Scene 5 - Context Accumulation
+  scene('── Scene 5: Context Accumulation (2:16-2:45) ──');
+  await pause(1500);
+  msg('alice','alice','<span class="code">@perseus</span> what API rate limits did we set last week?','10:35 AM');
+  await pause(900);
+
+  typing = document.createElement('div');
+  typing.className = 'msg';
+  typing.innerHTML = `<div class="avatar perseus">P</div><div class="msg-body"><div class="msg-text dim">Perseus is recalling context...</div></div>`;
+  screen.appendChild(typing);
+  screen.scrollTo({top: screen.scrollHeight});
+  await pause(700);
+  typing.remove();
+
+  msg('perseus','perseus',
+    '<b>🧠 Memory: API rate limits</b><span class="hr"></span>'
+    + '"Rate limits set to 100 req/min free tier, 1000/min pro — decided 2026-06-12. Config in gateway/rate_limiter.py"',
+    '10:35 AM');
+  await pause(1200);
+
+  msg('alice','alice','<span class="code">@perseus</span> show me gateway/rate_limiter.py','10:36 AM');
+  await pause(700);
+
+  msg('perseus','perseus',
+    '<b>📄 gateway/rate_limiter.py</b><span class="hr"></span>'
+    + '<span class="code">DEFAULT_TIER_LIMITS = {</span><br>'
+    + '<span class="code">    "free": 100,</span><br>'
+    + '<span class="code">    "pro": 1000,</span><br>'
+    + '<span class="code">    "enterprise": 10000,</span><br>'
+    + '<span class="code">}</span>',
+    '10:36 AM');
+  await pause(1000);
+
+  msg('bob','bob','<span class="code">@perseus</span> search files using DEFAULT_TIER_LIMITS','10:37 AM');
+  await pause(800);
+
+  msg('perseus','perseus',
+    '<b>🔍 Search: DEFAULT_TIER_LIMITS</b><span class="hr"></span>'
+    + '<span class="dim">Found 3 matches</span><br><br>'
+    + '<b>gateway/rate_limiter.py</b>  <span class="code">L14</span><br>'
+    + '<b>api/middleware.py</b>  <span class="code">L42</span><br>'
+    + '<b>tests/test_rate_limit.py</b>  <span class="code">L8</span>',
+    '10:37 AM');
+  await pause(3000);
+
+  // Closing
+  scene('── Perseus for Slack · github.com/Perseus-Computing-LLC/slack-perseus-agent · MIT ──');
+}
+
+run();
+</script>
+</body>
+</html>
