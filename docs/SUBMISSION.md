@@ -48,7 +48,10 @@ This is the strongest possible MCP entry: an actual production MCP server poweri
 - **More backends** — Git, JIRA, Linear connectors via Perseus extensibility
 
 ## Links
+- **Demo video:** https://www.youtube.com/watch?v=4fLo_PtEw-I
+- **Slack sandbox:** https://perseus.slack.com (collaborators: slackhack@salesforce.com, testing@devpost.com)
 - **GitHub:** https://github.com/Perseus-Computing-LLC/slack-perseus-agent
+- **Architecture diagram:** [assets/architecture-diagram.png](../assets/architecture-diagram.png)
 - **Perseus:** https://github.com/Perseus-Computing-LLC/perseus
 - **Mimir:** https://github.com/Perseus-Computing-LLC/mimir
 - **Hackathon:** https://slackhack.devpost.com/
