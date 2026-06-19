@@ -1,0 +1,51 @@
+{
+  "display_information": {
+    "name": "Perseus — Live Project Context",
+    "description": "AI agent that brings live project context into Slack — service health, memory recall, code search, and team knowledge. Powered by Perseus MCP server.",
+    "long_description": "Perseus connects your Slack workspace to live project context via MCP. Ask questions about services, recall team decisions, search code, and onboard new members — all without leaving Slack. Built on the Perseus MCP server with 27+ context tools.",
+    "background_color": "#1a1a2e"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "perseus",
+      "always_online": true
+    },
+    "slash_commands": [
+      {
+        "command": "/perseus",
+        "description": "Ask Perseus anything about your project — services, memory, search, context",
+        "usage_hint": "[services|memory|search|onboard|ask] [query]",
+        "should_escape": false
+      }
+    ]
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "app_mentions:read",
+        "chat:write",
+        "commands",
+        "im:history",
+        "im:read",
+        "im:write",
+        "channels:history",
+        "channels:read",
+        "groups:history",
+        "groups:read"
+      ]
+    }
+  },
+  "settings": {
+    "event_subscriptions": {
+      "bot_events": [
+        "app_mention",
+        "message.im"
+      ]
+    },
+    "interactivity": {
+      "is_enabled": true
+    },
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": true
+  }
+}
