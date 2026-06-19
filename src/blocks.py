@@ -143,9 +143,11 @@ def read_blocks(data: dict) -> list[dict]:
     ]
 
     if not content:
+        err = data.get("error", "")
+        msg = f"_Could not read file:_ `{err}`" if err else "_File is empty or not found._"
         blocks.append({
             "type": "section",
-            "text": {"type": "mrkdwn", "text": "_File is empty or not found._"},
+            "text": {"type": "mrkdwn", "text": msg},
         })
         return blocks
 
@@ -179,16 +181,19 @@ def search_blocks(data: dict, query: str) -> list[dict]:
         {"type": "divider"},
     ]
 
+    scanned = data.get("files_scanned")
+    scan_note = f" across {scanned} file(s)" if scanned else ""
+
     if not matches:
         blocks.append({
             "type": "section",
-            "text": {"type": "mrkdwn", "text": f"_No matches found for \"{query}\"._"},
+            "text": {"type": "mrkdwn", "text": f"_No matches found for \"{query}\"{scan_note}._"},
         })
         return blocks
 
     blocks.append({
         "type": "context",
-        "elements": [{"type": "mrkdwn", "text": f"Found {count} match(es)"}],
+        "elements": [{"type": "mrkdwn", "text": f"Found {count} match(es){scan_note}"}],
     })
 
     for i, match in enumerate(matches[:10]):
