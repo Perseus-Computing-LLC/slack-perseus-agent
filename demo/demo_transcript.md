@@ -53,7 +53,7 @@ Run before any new deployment."
 
 *db-decay-bug*
 2026-06-05
-"Fixed decay score recalculation bugs in Mneme v0.5.
+"Fixed decay score recalculation bugs in Perseus Vault v0.5.
 Always run cohere after backup."
 
 bob
@@ -122,7 +122,7 @@ Perseus APP  10:31 AM
 
 🧠 Recent Decisions:
 • Use postgres-16 for all new deployments
-• Mneme encryption enabled at rest (AES-256-GCM)
+• Perseus Vault encryption enabled at rest (AES-256-GCM)
 • CI requires rebuilt perseus.py after src/ changes
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Try @perseus services, @perseus memory <topic>, or @perseus search <query>

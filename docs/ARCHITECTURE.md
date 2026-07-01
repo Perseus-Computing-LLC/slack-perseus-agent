@@ -57,7 +57,7 @@ Perseus for Slack is a Slack agent that connects developer teams to live project
               │  ┌─────────────────────────────────┐ │
               │  │ Backends                        │ │
               │  ├─────────────────────────────────┤ │
-              │  │ Mneme (persistent memory)        │ │
+              │  │ Perseus Vault (persistent memory) │ │
               │  │  • FTS5 + vector hybrid search   │ │
               │  │  • Ebbinghaus decay              │ │
               │  │  • AES-256-GCM encryption        │ │
@@ -97,7 +97,7 @@ Perseus for Slack is a Slack agent that connects developer teams to live project
 - **Slack:** Bolt for Python, Socket Mode, Block Kit
 - **MCP:** Model Context Protocol 2025-06-18, JSON-RPC 2.0
 - **Perseus:** Live context engine v1.0.6, 27+ MCP tools
-- **Mneme:** Persistent memory with FTS5 + vector search
+- **Perseus Vault:** Persistent memory with FTS5 + vector search
 - **Python:** 3.11+, asyncio, httpx
 - **Demo:** Playwright, FFmpeg, HTML/CSS terminal simulation
 

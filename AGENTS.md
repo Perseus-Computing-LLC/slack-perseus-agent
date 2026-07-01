@@ -33,7 +33,7 @@ Slack user → Slack Bolt (Python, Socket Mode) → Perseus MCP server (JSON-RPC
 
 ## Perseus MCP tools used
 - `perseus_services` — service health
-- `perseus_memory` — Mneme recall
+- `perseus_memory` — Perseus Vault recall
 - `perseus_mimir` — direct FTS5 memory
 - `perseus_read` — file inspection
 - `perseus_list` — directory enumeration (also powers client-side code search)

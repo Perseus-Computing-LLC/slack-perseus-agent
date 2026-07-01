@@ -20,7 +20,7 @@ Built for the **Slack Agent Builder Challenge 2026** (New Slack Agent track) usi
 ```
 Slack User → Slack Agent (Bolt) → MCP → Perseus Server
                                         ├── perseus_services (health)
-                                        ├── perseus_memory  (Mneme recall)
+                                        ├── perseus_memory  (Perseus Vault recall)
                                         ├── perseus_read    (file inspection)
                                         ├── perseus_list    ─┐ code search:
                                         │                    ├─ enumerate + grep
