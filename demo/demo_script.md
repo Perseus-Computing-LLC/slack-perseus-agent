@@ -44,7 +44,7 @@ Found 3 results
 
 *db-decay-bug*
 2026-06-05
-"Fixed decay score recalc bugs in Mimir v0.5 — always run cohere after backup"
+"Fixed decay score recalc bugs in Mneme v0.5 — always run cohere after backup"
 ```
 
 ## Scene 3: Code Search (1:11–1:45)
@@ -99,7 +99,7 @@ oauth:
 
 🧠 Recent Decisions:
 • Use postgres-16 for all new deployments
-• Mimir encryption enabled at rest
+• Mneme encryption enabled at rest
 • CI requires rebuilt perseus.py after src changes
 ```
 

@@ -13,7 +13,7 @@
 Perseus for Slack is an AI agent that connects developer teams to live project context directly in Slack. It answers five critical questions developers ask every day:
 
 1. **"What services are running?"** — Real-time health checks with green/red status indicators
-2. **"What did we decide about X?"** — Persistent memory recall via Mimir (FTS5 + vector search)
+2. **"What did we decide about X?"** — Persistent memory recall via Mneme (FTS5 + vector search)
 3. **"Where is that code?"** — Full-text code search across the project (composed client-side from `perseus_list` + `perseus_read`)
 4. **"What should I know about this project?"** — New member onboarding with context dump
 5. **"Ask anything"** — Natural language queries against project knowledge
@@ -23,10 +23,10 @@ All responses are formatted with Slack Block Kit for rich, readable output.
 ## How I built it
 - **Slack Bolt (Python)** with Socket Mode for no-public-URL development
 - **MCP server integration** — Perseus MCP server provides 27+ context resolution tools via JSON-RPC 2.0
-- **Intent routing** — Regex-based deterministic routing for common commands, with NL fallback using Mimir memory recall
+- **Intent routing** — Regex-based deterministic routing for common commands, with NL fallback using Mneme memory recall
 - **Slack Block Kit** for all responses — color-coded statuses, code snippets, structured layouts
 - **Perseus Context Engine** — Live workspace context resolution (services, files, sessions, skills)
-- **Mimir Persistent Memory** — FTS5 + vector hybrid search with Ebbinghaus decay
+- **Mneme Persistent Memory** — FTS5 + vector hybrid search with Ebbinghaus decay
 
 ## Why MCP
 Perseus ships as a **production MCP server** with 27+ tools, real GitHub stars, and active pip installs. We didn't build an MCP server from scratch for this hackathon — we integrated a real, open-source MCP infrastructure that developers already use. The Slack agent demonstrates:
@@ -53,7 +53,7 @@ This is the strongest possible MCP entry: an actual production MCP server poweri
 - **GitHub:** https://github.com/Perseus-Computing-LLC/slack-perseus-agent
 - **Architecture diagram:** [assets/architecture-diagram.png](../assets/architecture-diagram.png)
 - **Perseus:** https://github.com/Perseus-Computing-LLC/perseus
-- **Mimir:** https://github.com/Perseus-Computing-LLC/mimir
+- **Mneme:** https://github.com/Perseus-Computing-LLC/mimir
 - **Hackathon:** https://slackhack.devpost.com/
 
 ## Built by
